@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+email<input id="kh-email"><br>
+licenseeno<input id="kh-licenseeno"><br>
+shopname<input id="kh-shopname"><br>
+shopaddr<input id="kh-shopaddr"><br>
+shoptel<input id="kh-shoptel"><br>
+shopintro<input id="kh-shopintro">
+
+<button id="kh-btn-shopadd">add</button>
+
+
+
+
+<script>
+
+
+
+
+
+
+$('#kh-btn-shopadd').click(function() {
+
+		$.ajax({
+			type : 'post',
+			dataType : "json",
+			url : '../json/shop/add.do',
+			data : {
+				eamil : $('#kh-email').val(),
+				licenseeno : $('#kh-licenseeno'),
+				shopname : $('#kh-shopname').val(),
+				shopaddr : $('#kh-shopaddr').val(),
+				shoptel : $('#kh-shoptel').val(),
+				shopintro : $('#kh-shopintro').val()
+			},
+			success : function(data) {
+				console.log(data.status);
+				console.log(data.loginUser);
+				alert("등록완료");
+				/* location.href = 'jy_main.html'; */
+
+			},
+			error : function() {
+				console.log('회원가입 ajax 실패');
+			}
+
+		});
+
+	
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+
+
+
+</html>

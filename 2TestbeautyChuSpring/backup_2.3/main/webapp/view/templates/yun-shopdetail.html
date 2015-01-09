@@ -1,0 +1,175 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Beauty Chu~♥</title>
+
+<link rel="shortcut icon" href="../images/favicon.ico"
+	type="image/x-icon">
+<link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+<link rel="shopsheet" type="text/css" href="../css/common.css">
+
+<style type="text/css">
+/* 스타일 적용 공간! */
+/*  * {
+	border: 1px solid red;
+} 
+ */
+#yun-shopdetailcontainer {
+	width: 1150px;
+	height: 600px;
+}
+
+.yun-shopcontainerdiv {
+	width: 528px;
+	height: 560px;
+	float: left;
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+#yun-buttondiv {
+	height: 50px;
+	float: right;
+}
+
+.yun-shopphotobig {
+	width: 520px;
+	height: 500px;
+	float: left;
+	margin-bottom: 3px;
+}
+
+.yun-shopphotosmall {
+	width: 50px;
+	height: 50px;
+	float: left;
+	margin-left: 3px;
+}
+
+#yun-shoptitle {
+	height: 90px;
+}
+
+#yun-shopcontentdetail {
+	height: 130px;
+}
+
+.yun-shopcomment{
+	width : 100%;
+}
+
+</style>
+
+</head>
+<body>
+
+	<header> header 건들지 말긔! </header>
+
+
+
+	<div id="wrap-chu" class="wrap-chu">
+
+ -->
+    <script type="text/javascript" src="../js/resources/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="../js/resources/kh/jssor.js"></script>
+    <script type="text/javascript" src="../js/resources/kh/jssor.slider.js"></script>
+<div id=yun-shopdetailcontainer>
+
+	<!--*****************************************************************************************-->
+	<!--**************************** 샵사진 슬라이드가 들어가는 div *****************************-->
+	<div id='yun-shopphotolist' class=yun-shopcontainerdiv>
+
+
+
+	</div>
+
+	<!--*****************************************************************************************-->
+	<!--**************************** 버튼 div  **************************************************-->
+	<div id=yun-shopcontent class=yun-shopcontainerdiv>
+		<div id=yun-buttondiv>
+			<img class=yun-back src="../images/yun-shopdetail/back-icon.png">
+			<img class=yun-exit src="../images/yun-shopdetail/exit-icon.png">
+		</div>
+		<!--*****************************************************************************************-->
+		<!--**************************** 샵 제목 div  ***********************************************-->
+
+		<div id=yun-shoptitle>
+			<h1>Juno hair</h1>
+		</div>
+		<!--*****************************************************************************************-->
+		<!--**************************** 샵 내용 div **************************************-->
+
+		<div id='yun-shopcontentdetail'>
+			<pre>
+안녕하세요^^	준오헤어 가로수길점입니다!
+	시원하게 탁트인 통유리의 인테리어로 고급스러움속의 심플함을 느낄 수 있는 곳
+, 다양한 스타일의 트렌드를 창조하는 최고의 스타일리스트와 함께
+ 준오헤어 가로수길점에서 행복과 여유를 만끽하시기 바랍니다.
+</pre>
+		</div>
+
+
+
+
+		<div class=buttondiv>
+			<div class="ui button yun-shoppricelist">Price List</div>
+			<div class="ui button kh-shopmap">지도보기</div>
+			<div class="ui button get-coupon">Get Coupon</div>
+		</div>
+
+		<div id=yun-shopcomment class=yun-shopcomment>
+			<img class=yun-shopcomment src="../images/yun-shopdetail/comment.png" />
+
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$('#yun-shopphotolist').load('templates/kh-styleimage-gallery.html');
+
+</script>
+<script>
+
+$( document ).ready(function() {
+	$(".kh-smalldetail").css("display", "none");
+$(".yun-shopstyle").hover(
+		  function () {
+			  $(this).find(".kh-smallbasic").css("display", "none");
+			  $(this).find(".kh-smalldetail").css("display", "block");
+			  $(this).find(".kh-gradation").css("display", "block");
+		  },
+		  function () {
+			  $(this).find(".kh-smallbasic").css("display", "block");
+			  $(this).find(".kh-smalldetail").css("display", "none");
+			  $(this).find(".kh-gradation").css("display", "none");
+		  }
+		);
+});
+
+
+
+
+
+</script>
+<!-- 
+	</div>
+
+
+	<footer> footer 건들지 말긔! </footer>
+
+
+
+
+	<script type="text/javascript"
+		src='../js/resources/jquery-2.1.1.min.js'></script>
+	<script>
+		$('header').load('common/header.html');
+		$('footer').load('common/footer.html');
+
+		/* 
+		window.setTimeout('window.location.reload()', 7000); //60초마다 새로고침
+		 */
+	</script>
+</body>
+</html> -->

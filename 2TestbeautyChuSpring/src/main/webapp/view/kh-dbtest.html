@@ -95,15 +95,11 @@ $.getJSON('../json/auth/loginUser.do', function(data){
 	  
 
   
-	$.getJSON('../json/style/list.do', 
+/* 	$.getJSON('../json/style/list.do', 
     function(data){
 	
 	console.log(data);
-/*         require(['text!templates/style-table.html'], function(html){
-	console.log(html);
-        var template = Handlebars.compile(html);
-        $('#listDiv').html( template(data) );
-      });   */
+
       $('#template').load('templates/style-table.html', function(source){
     	  console.log(source);
 	    	  var template = Handlebars.compile(source);
@@ -111,11 +107,21 @@ $.getJSON('../json/auth/loginUser.do', function(data){
 	    	  console.log(html);
 	    	  $('#d1').html(html);
 	    	});  
-    });
+    }); */
 	  
-	 
-
-
+	$.getJSON('../json/style/detail.do', 
+		    function(data){
+			
+			console.log(data);
+		      $('#template').load('templates/kh-styledetail.html', function(source){
+		    	  console.log(source);
+			    	  var template = Handlebars.compile(source);
+			    	  var html = template(data);
+			    	  console.log(html);
+			    	  $('#d1').html(html);
+			    	});  
+			
+		    });
 </script>
 
 </body>

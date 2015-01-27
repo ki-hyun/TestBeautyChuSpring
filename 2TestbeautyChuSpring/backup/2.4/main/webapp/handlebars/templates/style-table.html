@@ -1,0 +1,20 @@
+<table id='styleTable' class='table table-hover'>
+<tr>
+  <th>#</th><th>제품</th><th>수량</th><th>제조사</th><th>&nbsp;</th>
+</tr>
+{{#each style}}
+<tr class="data-row">
+  <td>{{stylenumber}}</td>
+  <td><a href="#" data-no="{{no}}">{{people}}</a></td>
+  <td>{{gender}}</td>
+  <td>{{styleLength}}</td>
+  <td>{{styleName}}</td>
+  <td>{{styleIntro}}</td>
+  <td>{{SkillTime}}</td>
+  <td>{{price}}</td>
+  <td>{{email}}</td>
+  <td><button data-no='{{no}}' 
+        class='my-delete-btn btn btn-danger'>삭제</button></td>
+</tr>
+{{/each}}
+</table>

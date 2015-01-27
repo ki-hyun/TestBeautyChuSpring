@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>dbtest</title>
-<script type="text/javascript" src="../js/jquery-1.11.0.min.js"></script>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
 
@@ -18,6 +18,11 @@ price<input id="kh-price" value=""><br>
 <a id='kh-email' href='#'></a>
 <button id="kh-styleadd">add</button>
 
+content<input id="kh-content"><br>
+star<input id="kh-star"><br>
+<button id="kh-reviewAdd">입력</button>
+
+
 <div class='container'>
 
 <div class='header'></div>
@@ -26,8 +31,10 @@ price<input id="kh-price" value=""><br>
 <h1>제품 목록</h1>
 <div id='listDiv'></div>
 <div class='yun-container'></div>
+
 <div id='d1'></div>
-<script id="template" type="text/temp"></script>
+<div id='d2'></div>
+<h1 id='h1'></h1>
 
 </div>
 
@@ -48,7 +55,6 @@ price<input id="kh-price" value=""><br>
 <script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
 <script type="text/javascript" src='../js/require.js'></script>
 <script>
-
 
 $('#kh-styleadd').click(function() {
 		$.ajax({
@@ -82,12 +88,37 @@ $('#kh-styleadd').click(function() {
 
 	});
 
+$('#kh-reviewAdd').click(function() {
+	$.ajax({
+		type : 'post',
+		dataType : "json",
+		url : '../json/review/reviewAdd.do',
+		data : {
+			content : $('#kh-content').val(),
+			star : $('#kh-star').val()
+		},
+		success : function(data) {
+			alert("추가완료");
+			/* location.href = 'jy_main.html'; */
+			htm
+		},
+		error : function() {
+			console.log('댓글등록 ajax 실패');
+		}
 
+	});
+
+
+});
+
+
+
+/* 
 $.getJSON('../json/auth/loginUser.do', function(data){
 		
 	  $('#kh-email').html(data.loginUser.email);
-	  /* $('#kh-price').val(data.loginUser.email); */
-	});
+	   $('#kh-price').val(data.loginUser.email); 
+	}); */
 	
 	
 
@@ -95,34 +126,70 @@ $.getJSON('../json/auth/loginUser.do', function(data){
 	  
 
   
-/* 	$.getJSON('../json/style/list.do', 
+ 	$.getJSON('../json/style/list.do', 
     function(data){
-	
-	console.log(data);
-
-      $('#template').load('templates/style-table.html', function(source){
-    	  console.log(source);
+      $.get('templates/style-table.html', function(source){
 	    	  var template = Handlebars.compile(source);
 	    	  var html = template(data);
-	    	  console.log(html);
 	    	  $('#d1').html(html);
 	    	});  
-    }); */
-	  
-	$.getJSON('../json/style/detail.do', 
+    }); 
+	 
+	  $(document).on('click', '.yun-box', function(){
+		 	console.log($(this).attr('data-no'));
+		  	loadProduct($(this).attr('data-no')); 
+		  	
+		  });
+	 
+ 	function loadProduct(productNo) {
+	$.getJSON('../json/style/detail.do?no='+productNo, 
 		    function(data){
 			
 			console.log(data);
-		      $('#template').load('templates/kh-styledetail.html', function(source){
-		    	  console.log(source);
+		      $.get('templates/kh-detailtest.html', function(source){
 			    	  var template = Handlebars.compile(source);
 			    	  var html = template(data);
 			    	  console.log(html);
-			    	  $('#d1').html(html);
+			    	  $('#d2').html(html);
+			    	  $('#kh-styleName').html(data.styleDetail.styleName);
+			    	  $('#kh-intro').html(data.styleDetail.styleIntro);
+			    	  $('#kh-time').html(data.styleDetail.skillTime);
+			    	  $('#kh-price').html(data.styleDetail.price);
 			    	});  
-			
+		      $.get('templates/kh-styleimage-gallery.html', function(source){
+		    	  var template = Handlebars.compile(source);
+		    	  var html = template(data);
+		    	  console.log(html);
+		    	  $('#yun-shopphotolist').html(html);
+		      });
+		      
+		      
+		      $.get('templates/jy_commenttemp.html', function(source){
+		    	  var template = Handlebars.compile(source);
+		    	  var html = template(data);
+		    	  $('#yun-stylecomment').html(html);
+		      });
+		      
 		    });
+ 	}
+	
+ 	
+	  $(document).on('click', '.yun-shop-button', function(){
+		 	console.log($(this).attr('data-email'));
+		  	
+		  });
+	
 </script>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

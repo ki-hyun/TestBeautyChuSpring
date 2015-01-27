@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 	int styleNumber;
+	String people;
+	String gender;
+	String styleLength;
+	String styleName;
+	String styleIntro;
+	int SkillTime;
+	int price;
+	String email; -->
+
+<mapper namespace="beautychu.dao.StyleDao">
+
+  <resultMap type="Style" id="styleMap">
+    <id column="STYLENO" property="styleNumber"/>
+    <result column="PEOPLE" property="people"/>
+    <result column="GENDER" property="gender"/>
+    <result column="STYLELENGTH" property="styleLength"/>
+    <result column="STYLENAME" property="styleName"/>
+    <result column="STYLEINTRO" property="styleIntro"/>    
+    <result column="SKILLTIME" property="SkillTime"/>
+    <result column="PRICE" property="price"/>
+    <result column="EMAIL" property="email"/>
+
+  </resultMap>
+  
+  <resultMap type="StyleGrid" id="styleGridMap">
+    <id column="STYLENO" property="styleNumber"/>
+    <result column="STYLENAME" property="styleName"/>
+    <result column="URL" property="url"/>
+
+  </resultMap>
+
+
+  <resultMap type="StyleDetail" id="styleDetailMap">
+    <id column="STYLENO" property="styleNumber"/>
+    <result column="STYLENAME" property="styleName"/>
+    <result column="STYLEINTRO" property="styleIntro"/> 
+    <result column="SKILLTIME" property="SkillTime"/>
+    <result column="PRICE" property="price"/> 
+  </resultMap>
+  
+  
+  <resultMap type="StylePhoto" id="stylePhotoMap">
+  	<id column="STYLEPOHOTONO" property="no"/>
+  	<result column="STYLENO" property="styleNo"/>
+  	<result column="URL" property="url"/>
+  </resultMap>
+
+
+  
+  <select id="getGridList" parameterType="map" resultMap="styleGridMap">
+    SELECT T1.STYLENAME, T2.URL 
+    FROM STYLE T1 JOIN STYLEPHOTO T2 USING(STYLENO)
+  </select>
+ 
+  <select id="getList" parameterType="map" resultMap="styleGridMap">
+
+    SELECT T1.STYLENO, T1.STYLENAME, T2.URL 
+    FROM STYLE T1 JOIN (SELECT STYLENO,URL,STYLEPHOTONO FROM STYLEPHOTO GROUP BY STYLENO) T2 USING(STYLENO) ORDER BY STYLENO
+  </select>
+
+  <select id="getStyleDetail" parameterType="int" resultMap="styleDetailMap">
+
+    SELECT STYLENO, STYLENAME, STYLEINTRO, SKILLTIME, PRICE 
+    FROM STYLE 
+    WHERE STYLENO =#{value}
+    <!-- ORDER BY STYLENO -->
+  </select>
+
+  
+  <select id="insertStyle" parameterType="Style" >
+    INSERT INTO STYLE (PEOPLE,GENDER,STYLELENGTH,STYLENAME,STYLEINTRO,SKILLTIME,PRICE,EMAIL)
+    VALUES (#{people},#{gender},#{styleLength},#{styleName},#{styleIntro},#{SkillTime},#{price},#{email})
+  </select>
+  
+  <select id="selectPhoto" parameterType="int" resultMap="stylePhotoMap">
+    SELECT STYLEPHOTONO, STYLENO, URL
+    FROM STYLEPHOTO
+    <if test="value > 0">
+    WHERE STYLENO = #{value}
+    </if>
+  </select>
+  
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

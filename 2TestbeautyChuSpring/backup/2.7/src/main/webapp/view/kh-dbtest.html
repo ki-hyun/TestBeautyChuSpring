@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>dbtest</title>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+
+
+people<input id="kh-people"><br>
+gender<input id="kh-gender"><br>
+stylelength<input id="kh-stylelength"><br>
+stylename<input id="kh-stylename"><br>
+styleintro<input id="kh-styleintro"><br>
+skilltime<input id="kh-skilltime"><br>
+price<input id="kh-price" value=""><br>
+<a id='kh-email' href='#'></a>
+<button id="kh-styleadd">add</button>
+
+content<input id="kh-content"><br>
+star<input id="kh-star"><br>
+<button id="kh-reviewAdd">입력</button>
+
+
+<div class='container'>
+
+<div class='header'></div>
+
+<div class='content'>
+<h1>제품 목록</h1>
+<div id='listDiv'></div>
+<div class='yun-container'></div>
+
+<div id='d1'></div>
+<div id='d2'></div>
+<h1 id='h1'></h1>
+
+</div>
+
+<hr>
+
+<div class="form"></div>
+
+<div class='footer'></div>
+
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
+<script type="text/javascript" src='../js/require.js'></script>
+<script>
+
+$('#kh-styleadd').click(function() {
+		$.ajax({
+			type : 'post',
+			dataType : "json",
+			url : '../json/style/add.do',
+			data : {
+				people : $('#kh-people').val(),
+				gender : $('#kh-gender').val(),
+				styleLength : $('#kh-stylelength').val(),
+				styleName : $('#kh-stylename').val(),
+				styleIntro : $('#kh-styleintro').val(),
+				SkillTime : $('#kh-skilltime').val(),
+				price : $('#kh-price').val(),
+				email : $('#kh-email').html()
+				
+			},
+			success : function(data) {
+				console.log(data.status);
+				console.log(data.loginUser);
+				alert("추가완료");
+				/* location.href = 'jy_main.html'; */
+				htm
+			},
+			error : function() {
+				console.log('회원가입 ajax 실패');
+			}
+
+		});
+
+
+	});
+
+$('#kh-reviewAdd').click(function() {
+	$.ajax({
+		type : 'post',
+		dataType : "json",
+		url : '../json/review/reviewAdd.do',
+		data : {
+			content : $('#kh-content').val(),
+			star : $('#kh-star').val()
+		},
+		success : function(data) {
+			alert("추가완료");
+			/* location.href = 'jy_main.html'; */
+			htm
+		},
+		error : function() {
+			console.log('댓글등록 ajax 실패');
+		}
+
+	});
+
+
+});
+
+
+
+/* 
+$.getJSON('../json/auth/loginUser.do', function(data){
+		
+	  $('#kh-email').html(data.loginUser.email);
+	   $('#kh-price').val(data.loginUser.email); 
+	}); */
+	
+	
+
+	 /*  if (pageNo <= 0) pageNo = currPageNo; */
+	  
+
+  
+ 	$.getJSON('../json/style/list.do', 
+    function(data){
+      $.get('templates/style-table.html', function(source){
+	    	  var template = Handlebars.compile(source);
+	    	  var html = template(data);
+	    	  $('#d1').html(html);
+	    	});  
+    }); 
+	 
+	  $(document).on('click', '.yun-box', function(){
+		 	console.log($(this).attr('data-no'));
+		  	loadProduct($(this).attr('data-no')); 
+		  	
+		  });
+	 
+ 	function loadProduct(productNo) {
+	$.getJSON('../json/style/detail.do?no='+productNo, 
+		    function(data){
+			
+			console.log(data);
+		      $.get('templates/kh-detailtest.html', function(source){
+			    	  var template = Handlebars.compile(source);
+			    	  var html = template(data);
+			    	  console.log(html);
+			    	  $('#d2').html(html);
+			    	  $('#kh-styleName').html(data.styleDetail.styleName);
+			    	  $('#kh-intro').html(data.styleDetail.styleIntro);
+			    	  $('#kh-time').html(data.styleDetail.skillTime);
+			    	  $('#kh-price').html(data.styleDetail.price);
+			    	});  
+		      $.get('templates/kh-styleimage-gallery.html', function(source){
+		    	  var template = Handlebars.compile(source);
+		    	  var html = template(data);
+		    	  console.log(html);
+		    	  $('#yun-shopphotolist').html(html);
+		      });
+		      
+		      
+		      $.get('templates/jy_commenttemp.html', function(source){
+		    	  var template = Handlebars.compile(source);
+		    	  var html = template(data);
+		    	  $('#yun-stylecomment').html(html);
+		      });
+		      
+		    });
+ 	}
+	
+ 	
+	  $(document).on('click', '.yun-shop-button', function(){
+		 	console.log($(this).attr('data-email'));
+		  	
+		  });
+	
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

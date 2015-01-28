@@ -74,7 +74,7 @@ public class dbtestControl {
 		return resultMap;
 	}*/
 
-	/*@RequestMapping("/add")
+	@RequestMapping("/add")
 	// @ResponseBody
 	public Object join(String people, String gender,String stylelength, String stylename,String styleintro,int skilltime,int price,String email,HttpSession session) throws Exception {
 		Style style = new Style();
@@ -94,32 +94,6 @@ public class dbtestControl {
 		session.setAttribute("addStyle", style);
 		resultMap.put("status", "success");
 		resultMap.put("addStyle", style);
-		return resultMap;
-	}*/
-	
-	
-	@RequestMapping("/add")
-	// @ResponseBody
-	public Object join(String people, String gender,String styleLength, String styleName,String styleIntro,int SkillTime,int price,String email,HttpSession session) throws Exception {
-		
-
-		Style style = new Style();
-		style.setPeople(people);
-		style.setGender(gender);
-		style.setStyleLength(styleLength);
-		style.setStyleName(styleName);
-		style.setStyleIntro(styleIntro);
-		style.setSkillTime(SkillTime);
-		style.setPrice(price);
-		style.setEmail(email);
-		styleService.insertStyle(style);
-		
-		
-		HashMap<String, Object> resultMap = new HashMap<>();
-
-		
-		
-		
 		return resultMap;
 	}
 }

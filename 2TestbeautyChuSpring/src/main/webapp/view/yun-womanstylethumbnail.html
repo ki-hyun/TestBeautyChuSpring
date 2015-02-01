@@ -4,9 +4,20 @@
 <meta charset="UTF-8">
 <title>Beauty Chu~♥</title>
 
-<link rel="shortcut icon" href="../images/favicon.ico"
-	type="image/x-icon">
+
+<!-- 마페 -->
+
+<link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+
+<link rel="stylesheet" type="text/css" href="../css/basic.css"/>
+
+<script type="text/javascript" src="../js/modernizr.min.js"></script>
+<script type="text/javascript" src="../js/jquery.easing.js"></script>
+<script type="text/javascript" src="../js/jquery-scrolltofixed-min.js"></script>
+<script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
+
+<!-- 마페 -->
 <link rel="stylesheet" href="../css/resources/starrr.css">
 <link rel="stylesheet"
 	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
@@ -22,18 +33,12 @@
 
 
 <!-- 썸네일 이미지 -->	
-
-	<link rel="stylesheet" type="text/css" href="../css/thumnail.css" />
+<!-- 헤더랑 충돌중	<link rel="stylesheet" type="text/css" href="../css/thumnail.css" /> --> 
 	<link rel="stylesheet" type="text/css" href="../css/shop.css" />
 
  <!-- 공통 스크립트 -->
-<!-- <script type="text/javascript" src="../js/modernizr.min.js"></script> -->
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- <script type="text/javascript" src="../js/jquery.easing.js"></script> -->
-<!-- <script type="text/javascript" src="../js/jquery-scrolltofixed-min.js"></script> -->
 <script type="text/javascript" src="../js/common.js"></script>
-<!-- <script type="text/javascript" src="../js/motion.js"></script>  -->
-<!-- <script type="text/javascript" src="../js/jquery.motio.min.js"></script>  -->
 
 
 	<script>
@@ -41,19 +46,9 @@
 	</script>
 		
 <!-- 	page가 home일 경우에만 로드하는 js -->
-<!--  	<script type="text/javascript" src="../js/jquery.touchSwipe.min.js"></script> -->
-<!-- 	<script type="text/javascript" src="../js/jquery.event.drag-2.2.js"></script> -->
-<!-- 	<script type="text/javascript" src="../js/jquery.event.drag.live-2.2.js"></script> -->
-<!-- 	<script type="text/javascript" src="../js/home.js"></script> -->
-<!-- 	<script type="text/javascript" src="../js/home.show-window.js"></script> -->
 <!-- 공통 스크립트 -->
 
 
-<script type="text/javascript" src='../js/handlebars-v2.0.0.js'></script>
-
-
-
-<!--     <script type="text/javascript" src="../js/resources/jquery-1.9.1.min.js"></script> -->
     <script type="text/javascript" src="../js/resources/kh/jssor.js"></script> 
     <script type="text/javascript" src="../js/resources/kh/jssor.slider.js"></script> 
 
@@ -62,9 +57,6 @@
 	<script type="text/javascript" src="../js/shop.js"></script>
 
 <style type="text/css">
-
-
-
 
 
 /* 스타일 적용 공간! */
@@ -112,7 +104,7 @@ height: 50px;
 	width: 1200px;
 	height: 100%;
 	margin: 0 auto;
-	margin-top: 110px; 
+	margin-top: 30px; 
 }
 
 html {
@@ -495,10 +487,11 @@ border-radius: 20px;
 
 </head>
 <body class="home">
+<div style="background-color: white;">
 
-	<jy_header>
+	<header>
 		<!-- header 건들지 말긔! -->
-	</jy_header>
+	</header>
 
 
 	<!--	<div id=changediv >
@@ -542,7 +535,7 @@ border-radius: 20px;
 
 	<script type="text/javascript">
 	<!-- header, footer 로드 스크립트!! -->
-		$('jy_header').load('common/jy_header.html'); 
+		$('header').load('common/header.html'); 
 		$('footer').load('common/footer.html');
 
 		
@@ -694,11 +687,9 @@ border-radius: 20px;
 		 $('div').on("click", '.reviewDelete-btn', function(){
 			 event.stopPropagation();
 			 if (confirm('댓글을 삭제하시겠습니까?')) {
-				  (function(){
 					  deleteReview($(this).attr('data-reviewNo'));
-				  }).done(function(){
 						  refreshReview($("#kh-reviewAdd").attr('data-no'));
-				  });
+
 				  
 				 /*  $.get(deleteReview($(this).attr('data-reviewNo'))).done(function() {
 					  refreshReview($("#kh-reviewAdd").attr('data-no'));
@@ -1010,7 +1001,7 @@ border-radius: 20px;
  								      $.get('templates/style-table.html', function(source){
  									    	  var template = Handlebars.compile(source);
  									    	  var html = template(data);
- 									    	  /* console.log(html); */
+ 									    	  console.log(html);
  									    	  $('.yun-container').html(html);
  									    	});  
  								    });
@@ -1046,7 +1037,7 @@ border-radius: 20px;
 			    });
 	 	}
 	</script>
-
+</div>
 </body>
 </html>
 

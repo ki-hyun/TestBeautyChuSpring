@@ -1,8 +1,6 @@
 <!-- 공통 header -->
 <script type="text/javascript" src="../js/common.js"></script>
 
-<!-- <link rel="stylesheet" type="text/css" href="../css/basic.css" /> -->
-
 
 <!-- login form css -->
 <link rel="stylesheet" type="text/css" href="../css/jy/jy_dialog.css" />
@@ -16,7 +14,7 @@
 
 <div id="header">
 	<div class="inner">
-		<h1 class="logo">
+		<h1 class="logo"> 
 			<a id="logo-title" href="main.html">Beauty Chu~♥</a>
 		</h1>
 
@@ -41,15 +39,15 @@
 					</div></li>
 				<!-- end of li.m1 -->
 
-				<li class="m2"><a href="kh-styleman.html"><span
+				<li class="m2"><a href="kh-manAll.html"><span
 						class="over"></span><span class="label">Man</span></a>
 					<div class="sub-menu">
 						<ul>
-							<li class="m2"><a href="#">Man Cut</a></li>
-							<li class="m3"><a href="#">Man Perm</a></li>
-							<li class="m4"><a href="#,">Man Color</a></li>
-							<li class="m5"><a href="#">Man Care</a></li>
-							<li class="m6"><a href="#">Man ETC</a></li>
+							<li class="m2"><a href="kh-manCut.html">Man Cut</a></li>
+							<li class="m3"><a href="kh-manPerm.html">Man Perm</a></li>
+							<li class="m4"><a href="kh-manColor.html">Man Color</a></li>
+							<li class="m5"><a href="kh-manCare.html">Man Care</a></li>
+							<li class="m6"><a href="kh-manEtc.html">Man ETC</a></li>
 						</ul>
 
 					</div> <!-- Fashion &amp; Style Content -->
@@ -63,11 +61,11 @@
 						class="over"></span><span class="label">woman</span></a>
 					<div class="sub-menu">
 						<ul>
-							<li class="m1"><a href="#">Woman Cut</a></li>
-							<li class="m2"><a href="#">Woman Perm</a></li>
-							<li class="m3_02"><a href="#">Woman Color</a></li>
-							<li class="m3"><a href="#">Woman Care</a></li>
-							<li class="m4"><a href="#">Woman ETC</a></li>
+							<li class="m1"><a href="kh-womanCut.html">Woman Cut</a></li>
+							<li class="m2"><a href="kh-womanPerm.html">Woman Perm</a></li>
+							<li class="m3_02"><a href="kh-womanColor.html">Woman Color</a></li>
+							<li class="m3"><a href="kh-womanCare.html">Woman Care</a></li>
+							<li class="m4"><a href="kh-womanEtc.html">Woman ETC</a></li>
 						</ul>
 					</div></li>
 				<!-- end of li.m3 -->
@@ -83,8 +81,8 @@
 				</li>
 				<!-- search area -->
 				<li class="m5" style="border-right: 0;">
-					<form method="get" action="/search" id="search">
-						<input name="q" id="search-bar" type="text" placeholder="Search..." />
+					<form method="get"  id="search">
+						<input name="" id="search-bar" type="text" placeholder="Search..." />
 					</form>
 				</li>
 			<!-- end of li.m4 -->
@@ -436,10 +434,10 @@ $.ajax({
 				$('#jy-pw-check').html("비밀번호를 입력해주세요.");
 				passwordpass = 0;
 			} else if (password1 === password2) {
-				$('#jy-pw-check').html("패스워드가 일치 합니다.^^").css("color","blue");
+				$('#jy-pw-check').html("패스워드가 일치 합니다.").css("color","blue");
 				passwordpass = 1;
 			} else {
-				$('#jy-pw-check').html("패스워드가 일치하지 않습니다..").css("color","red");
+				$('#jy-pw-check').html("패스워드가 일치하지 않습니다.").css("color","red");
 				passwordpass = 0;
 			}
 		}
@@ -482,7 +480,7 @@ $.ajax({
 					success : function(data) {
 						console.log("join"+data.status);
 						console.log(data.loginUser);
-						alert("가입이 완료되었습니다.\n 환영합니다^^");
+						alert("가입이 완료되었습니다.\n " + data.loginUser.name + "님 환영합니다^^");
 						location.href = 'main.html';
 
 					},
@@ -574,10 +572,10 @@ $.ajax({
 
 	(function() {
 		/* click to mypage account */
-		$('.jy-mypage').click(function() {
+/* 		$('.jy-mypage').click(function() {
 			alert("마이페이지 입니다!");
 			console.log("마이페이지 입니다!");
-		});
+		}); */
 
 		/* -------------------  */
 
@@ -589,7 +587,7 @@ $.ajax({
 				url : '../json/auth/logout.do',
 				success : function() {
 					console.log('로그아웃 되었습니다.');
-				  alert("로그아웃 되었습니다.");
+				  //alert("로그아웃 되었습니다.");
 				  location.href = 'main.html';
 				},
 				error : function() {
@@ -604,5 +602,22 @@ $.ajax({
 
 
 })();
+	
+	
+	/* 검색기능 완료 */
+	$("#search-bar").keyup(function() {
+		console.log("ddddddddddddddddd");
+		$.getJSON('../json/style/list.do?people=normal&gender=woman&styleLength=All&styleSort=All&styleName='+$('#search-bar').val(), 
+			    function(data){
+								console.log(data);	
+								console.log($('#search-bar').val());
+
+					      $.get('templates/style-table.html', function(source){
+						    	  var template = Handlebars.compile(source);
+						    	  var html = template(data);
+						    	  $('.yun-container').html(html);
+						    	});  
+					    });
+	});
 
 </script>
